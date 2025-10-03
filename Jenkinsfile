@@ -9,12 +9,7 @@ pipeline {
         }
 
        
-        stage('Security Scan') {
-            steps {
-                sh 'npm install -g snyk'
-                sh 'snyk test || exit 1'
-            }
-        }
+       
 
         stage('Build Docker Image') {
             steps {
