@@ -1,7 +1,5 @@
 pipeline {
-    agent { 
-        docker { image 'node:16' } 
-    }
+    agent any
 
     stages {
         stage('Install Dependencies') {
@@ -25,15 +23,15 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t deepikasharma1901/nodeapp:latest .'
+                sh 'docker build -t 21952195/nodeapp:latest .'
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhub-pass', variable: 'DOCKER_PASS')]) {
-                    sh 'echo $DOCKER_PASS | docker login -u deepikasharma1901 --password-stdin'
-                    sh 'docker push deepikasharma1901/nodeapp:latest'
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-pass', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                    sh 'docker push 21952195/nodeapp:latest'
                 }
             }
         }
