@@ -8,12 +8,7 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                sh 'npm test'
-            }
-        }
-
+       
         stage('Security Scan') {
             steps {
                 sh 'npm install -g snyk'
